@@ -1,0 +1,12 @@
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe.config
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.pdb
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\bin\Debug\SCCCosmetology.dll
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\bin\Debug\SCCCosmetology.pdb
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csprojResolveAssemblyReference.cache
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Properties.Resources.resources
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.exe
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
+E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Form1.resources
