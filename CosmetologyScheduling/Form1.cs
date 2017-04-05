@@ -25,50 +25,39 @@ namespace CosmetologyScheduling
         //The Shown even takes place after the form is first displayed on the screen
         private void Form1_Shown(object sender, EventArgs e)
         {
-            // Create and display login form
-            LoginForm login = new LoginForm();
-
-            // Start DialogBox
-            login.ShowDialog(this);
-            validLogin = login.ValidLogin;
-            currentUser = new User(login.Username);
-
-            // Update name label
-            nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
-
-            if (validLogin)
-            {
-                if (currentUser != null)
-                    MessageBox.Show("You are logged in");
-
-                //Redraw the schedule
-                s.Update();
-            }
+            Login();
         }
 
         //The Paint event takes place any time the form is resized/minimized/maximized
-        private void Form1_Resize(object sender, EventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //Redraw the schedule
-            s.Update();
+            if (validLogin)
+                s.Update(); //Redraw schedule
         }
 
         private void ShowApptBox()
         {
-            apptGroupBox.Enabled = true;
-            apptGroupBox.Visible = true;
+                apptGroupBox.Enabled = true;
+                apptGroupBox.Visible = true;
         }
 
         private void HideApptBox()
         {
-            apptGroupBox.Enabled = false;
-            apptGroupBox.Visible = false;
-            s.Update();
+                apptGroupBox.Enabled = false;
+                apptGroupBox.Visible = false;
+                s.Update();
         }
 
         private void apptButton_Click(object sender, EventArgs e)
         {
-            ShowApptBox();
+            if (validLogin && apptGroupBox.Visible == false)
+            {
+                ShowApptBox();
+            }
+            else
+            {
+                HideApptBox();
+            }
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -100,6 +89,89 @@ namespace CosmetologyScheduling
             }
 
             custLookup.Dispose();
+        }
+
+        private void userInfoButton_Click(object sender, EventArgs e)
+        {
+            if (validLogin)
+            {
+                //TODO: Show user info
+            }
+            else
+            {
+                Login();
+            }
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            if (validLogin)
+            {
+                s.Erase();
+                nameLabel.Text = "";
+                userInfoButton.Text = "&Log In";
+                currentUser = null;
+                logOutButton.Text = "E&xit";
+                validLogin = false;
+                HideButtons();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void ShowButtons()
+        {
+            settingsButton.Enabled = true;
+            settingsButton.Visible = true;
+
+            adminButton.Enabled = true;
+            adminButton.Visible = true;
+
+            apptButton.Enabled = true;
+            apptButton.Visible = true;
+        }
+
+        private void HideButtons()
+        {
+            settingsButton.Enabled = false;
+            settingsButton.Visible = false;
+
+            adminButton.Enabled = false;
+            adminButton.Visible = false;
+
+            apptButton.Enabled = false;
+            apptButton.Visible = false;
+        }
+
+        private void Login()
+        {
+            // Create and display login form
+            LoginForm login = new LoginForm();
+
+            // Start DialogBox
+            login.ShowDialog(this);
+            validLogin = login.ValidLogin;
+            string username = login.Username;
+
+            if (validLogin)
+            {
+                currentUser = new User(username);
+
+                // Update name label and buttons
+                nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
+                userInfoButton.Text = "Show &Info";
+                logOutButton.Text = "&Log Out";
+
+                //Enable buttons on the form
+                ShowButtons();
+
+                //Redraw the schedule
+                s.Update();
+            }
+
+            login.Dispose();
         }
     }
 }

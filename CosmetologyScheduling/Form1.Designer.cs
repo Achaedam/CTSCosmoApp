@@ -64,11 +64,11 @@
             // nameLabel
             // 
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(667, 9);
+            this.nameLabel.Location = new System.Drawing.Point(473, 9);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(0, 13);
+            this.nameLabel.Size = new System.Drawing.Size(299, 13);
             this.nameLabel.TabIndex = 0;
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // userInfoButton
             // 
@@ -77,8 +77,9 @@
             this.userInfoButton.Name = "userInfoButton";
             this.userInfoButton.Size = new System.Drawing.Size(75, 23);
             this.userInfoButton.TabIndex = 1;
-            this.userInfoButton.Text = "Show &Info";
+            this.userInfoButton.Text = "&Log In";
             this.userInfoButton.UseVisualStyleBackColor = true;
+            this.userInfoButton.Click += new System.EventHandler(this.userInfoButton_Click);
             // 
             // logOutButton
             // 
@@ -87,18 +88,21 @@
             this.logOutButton.Name = "logOutButton";
             this.logOutButton.Size = new System.Drawing.Size(75, 23);
             this.logOutButton.TabIndex = 2;
-            this.logOutButton.Text = "&Log Out";
+            this.logOutButton.Text = "E&xit";
             this.logOutButton.UseVisualStyleBackColor = true;
+            this.logOutButton.Click += new System.EventHandler(this.logOutButton_Click);
             // 
             // adminButton
             // 
             this.adminButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.adminButton.Enabled = false;
             this.adminButton.Location = new System.Drawing.Point(535, 526);
             this.adminButton.Name = "adminButton";
             this.adminButton.Size = new System.Drawing.Size(75, 23);
             this.adminButton.TabIndex = 3;
             this.adminButton.Text = "&Admin";
             this.adminButton.UseVisualStyleBackColor = true;
+            this.adminButton.Visible = false;
             // 
             // editButton
             // 
@@ -367,29 +371,33 @@
             // apptButton
             // 
             this.apptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.apptButton.Enabled = false;
             this.apptButton.Location = new System.Drawing.Point(450, 526);
             this.apptButton.Name = "apptButton";
             this.apptButton.Size = new System.Drawing.Size(79, 23);
             this.apptButton.TabIndex = 5;
             this.apptButton.Text = "A&ppointments";
             this.apptButton.UseVisualStyleBackColor = true;
+            this.apptButton.Visible = false;
             this.apptButton.Click += new System.EventHandler(this.apptButton_Click);
             // 
             // settingsButton
             // 
             this.settingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsButton.Enabled = false;
             this.settingsButton.Location = new System.Drawing.Point(616, 526);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 6;
             this.settingsButton.Text = "Se&ttings";
             this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.apptButton);
             this.Controls.Add(this.apptGroupBox);
@@ -400,13 +408,12 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Scheduling";
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.apptGroupBox.ResumeLayout(false);
             this.apptGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -28,16 +28,33 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            username = usernameTextBox.Text.ToString();
-
-            if (Utilities.Authenticator.AttemptLogin(username,passwordTextBox.Text.ToString()))
+            if (usernameTextBox.Text.ToString() != "")
             {
-                validLogin = true;
-                this.Close();
+                if (passwordTextBox.Text.ToString() != "")
+                {
+                    username = usernameTextBox.Text.ToString();
+                    validLogin = Utilities.Authenticator.AttemptLogin(username, passwordTextBox.Text.ToString());
+
+                    if (validLogin)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username or Password was incorrect.", "Invalid Login Information");
+                        usernameTextBox.Text = "";
+                        passwordTextBox.Text = "";
+                        usernameTextBox.Focus();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You must enter a password.", "No Password Entered");
+                }
             }
             else
             {
-                MessageBox.Show("Username or Password was incorrect.","Invalid Login Information");
+                MessageBox.Show("You must enter a username.", "No Username Entered");
             }
         }
 

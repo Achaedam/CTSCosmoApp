@@ -10,3 +10,14 @@ E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\Cosmetolo
 E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb
 E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
 E:\CTS 289\Final\CosmetologyScheduling\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Form1.resources
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe.config
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.exe
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.pdb
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\bin\Debug\SCCCosmetology.pdb
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csprojResolveAssemblyReference.cache
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Form1.resources
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Properties.Resources.resources
+D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache

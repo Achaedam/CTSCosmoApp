@@ -67,7 +67,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '•';
             this.passwordTextBox.Size = new System.Drawing.Size(184, 20);
-            this.passwordTextBox.TabIndex = 3;
+            this.passwordTextBox.TabIndex = 2;
             // 
             // passLabel
             // 
@@ -99,7 +99,7 @@
             this.submitButton.Location = new System.Drawing.Point(12, 131);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(127, 23);
-            this.submitButton.TabIndex = 2;
+            this.submitButton.TabIndex = 3;
             this.submitButton.Text = "&Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -109,13 +109,14 @@
             this.exitButton.Location = new System.Drawing.Point(145, 131);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(127, 23);
-            this.exitButton.TabIndex = 3;
+            this.exitButton.TabIndex = 4;
             this.exitButton.Text = "&Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // LoginForm
             // 
+            this.AcceptButton = this.submitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 166);
@@ -125,7 +126,7 @@
             this.Controls.Add(this.instructionLabel);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LoginForm";
+            this.Text = "Login";
             this.loginGroupBox.ResumeLayout(false);
             this.loginGroupBox.PerformLayout();
             this.ResumeLayout(false);
