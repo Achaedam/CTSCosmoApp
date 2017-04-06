@@ -27,12 +27,13 @@ namespace CosmetologyScheduling
         {
             Login();
 
-            //Redraw the schedule
-            s.Update();
+            if (validLogin)
+                //Redraw the schedule
+                s.Update();
         }
 
         //The Paint event takes place any time the form is resized/minimized/maximized
-        private void Form1_Paint(object sender, EventArgs e)
+        private void Form1_Resize(object sender, EventArgs e)
         {
             if (validLogin)
                 s.Update(); //Redraw schedule
