@@ -48,3 +48,7 @@ C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\C
 C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
 C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustLookup.resources
 >>>>>>> .r4
+C:\Users\utta2\Desktop\GitRepo\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustLookup.resources
+||||||| .r6
+>>>>>>> .r3
+>>>>>>> .r6
