@@ -15,6 +15,8 @@ namespace CosmetologyScheduling
 {
     public partial class CustLookup : Form
     {
+
+        int counter = 0;
         public CustLookup()
         {
             InitializeComponent();
@@ -71,7 +73,18 @@ namespace CosmetologyScheduling
                 while (rdr.Read())
                 {
                     Customer cust = new Customer(Convert.ToInt32(rdr[0]));
-                    custListBox.Items.Add(cust);
+                    outputListView.Items.Add(cust.FirstName);
+                    outputListView.Items[counter].SubItems.Add(cust.LastName);
+                    outputListView.Items[counter].SubItems.Add(EditPhone(cust.Phone));
+                    outputListView.Items[counter].SubItems.Add(cust.Email);
+                    outputListView.Items[counter].SubItems.Add(cust.Address);
+                    outputListView.Items[counter].SubItems.Add(cust.City);
+                    outputListView.Items[counter].SubItems.Add(cust.State);
+                    outputListView.Items[counter].SubItems.Add(cust.Zip);
+                    outputListView.Items[counter].SubItems.Add(cust.IsBanned.ToString());
+                    outputListView.Items[counter].SubItems.Add(cust.Memo);
+                    ResizeListViewColumns(outputListView);
+                    counter++;
                 }
 
 
@@ -90,6 +103,25 @@ namespace CosmetologyScheduling
                     rdr.Close();
                 if (conn != null)
                     conn.Close();
+            }
+
+        }
+
+        private string EditPhone(string x)
+        {
+            //(333)333-3333
+            string y = x;
+            y = y.Insert(0, "(");
+            y = y.Insert(4, ")");
+            y = y.Insert(8, "-");
+            return y;
+        }
+
+        private void ResizeListViewColumns(ListView lv)
+        {
+            foreach (ColumnHeader column in lv.Columns)
+            {
+                column.Width = -2;
             }
         }
     }

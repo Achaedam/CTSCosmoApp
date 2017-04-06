@@ -34,9 +34,19 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
-            this.custListBox = new System.Windows.Forms.ListBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
+            this.outputListView = new System.Windows.Forms.ListView();
+            this.fNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.phoneCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.emailCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.addressCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cityCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.stateCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.zipCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.bannedCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.memoCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // instructionLabel
@@ -91,15 +101,6 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // custListBox
-            // 
-            this.custListBox.Enabled = false;
-            this.custListBox.FormattingEnabled = true;
-            this.custListBox.Location = new System.Drawing.Point(12, 84);
-            this.custListBox.Name = "custListBox";
-            this.custListBox.Size = new System.Drawing.Size(333, 95);
-            this.custListBox.TabIndex = 6;
-            // 
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(270, 185);
@@ -119,14 +120,74 @@
             this.submitButton.Text = "&Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             // 
+            // outputListView
+            // 
+            this.outputListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fNameCol,
+            this.lNameCol,
+            this.phoneCol,
+            this.emailCol,
+            this.addressCol,
+            this.cityCol,
+            this.stateCol,
+            this.zipCol,
+            this.bannedCol,
+            this.memoCol});
+            this.outputListView.Location = new System.Drawing.Point(12, 82);
+            this.outputListView.Name = "outputListView";
+            this.outputListView.Size = new System.Drawing.Size(333, 97);
+            this.outputListView.TabIndex = 10;
+            this.outputListView.UseCompatibleStateImageBehavior = false;
+            this.outputListView.View = System.Windows.Forms.View.Details;
+            // 
+            // fNameCol
+            // 
+            this.fNameCol.Text = "Fisrt Name";
+            // 
+            // lNameCol
+            // 
+            this.lNameCol.Text = "Last Name";
+            // 
+            // phoneCol
+            // 
+            this.phoneCol.Text = "Phone";
+            // 
+            // emailCol
+            // 
+            this.emailCol.Text = "Email";
+            // 
+            // addressCol
+            // 
+            this.addressCol.Text = "Address";
+            // 
+            // cityCol
+            // 
+            this.cityCol.Text = "City";
+            // 
+            // stateCol
+            // 
+            this.stateCol.Text = "State";
+            // 
+            // zipCol
+            // 
+            this.zipCol.Text = "Zip";
+            // 
+            // bannedCol
+            // 
+            this.bannedCol.Text = "Banned";
+            // 
+            // memoCol
+            // 
+            this.memoCol.Text = "Memo";
+            // 
             // CustLookup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 216);
+            this.ClientSize = new System.Drawing.Size(357, 218);
+            this.Controls.Add(this.outputListView);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.custListBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(this.emailLabel);
@@ -148,8 +209,18 @@
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.ListBox custListBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.ListView outputListView;
+        private System.Windows.Forms.ColumnHeader fNameCol;
+        private System.Windows.Forms.ColumnHeader lNameCol;
+        private System.Windows.Forms.ColumnHeader phoneCol;
+        private System.Windows.Forms.ColumnHeader emailCol;
+        private System.Windows.Forms.ColumnHeader addressCol;
+        private System.Windows.Forms.ColumnHeader cityCol;
+        private System.Windows.Forms.ColumnHeader stateCol;
+        private System.Windows.Forms.ColumnHeader zipCol;
+        private System.Windows.Forms.ColumnHeader bannedCol;
+        private System.Windows.Forms.ColumnHeader memoCol;
     }
 }

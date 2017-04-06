@@ -21,3 +21,15 @@ D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\
 D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
 D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Properties.Resources.resources
 D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe.config
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.exe
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.pdb
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\bin\Debug\SCCCosmetology.pdb
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csprojResolveAssemblyReference.cache
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Form1.resources
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Properties.Resources.resources
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
+C:\Users\richardsons3\Desktop\New folder\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustLookup.resources
