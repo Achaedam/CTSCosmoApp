@@ -26,10 +26,13 @@ namespace CosmetologyScheduling
         private void Form1_Shown(object sender, EventArgs e)
         {
             Login();
+
+            //Redraw the schedule
+            s.Update();
         }
 
         //The Paint event takes place any time the form is resized/minimized/maximized
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Form1_Paint(object sender, EventArgs e)
         {
             if (validLogin)
                 s.Update(); //Redraw schedule
@@ -167,8 +170,7 @@ namespace CosmetologyScheduling
                 //Enable buttons on the form
                 ShowButtons();
 
-                //Redraw the schedule
-                s.Update();
+                
             }
 
             login.Dispose();

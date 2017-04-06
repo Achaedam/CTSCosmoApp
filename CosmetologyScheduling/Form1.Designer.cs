@@ -410,7 +410,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scheduling";
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.Resize += new System.EventHandler(this.Form1_Paint);
             this.apptGroupBox.ResumeLayout(false);
             this.apptGroupBox.PerformLayout();
             this.ResumeLayout(false);
