@@ -22,21 +22,40 @@ namespace CosmetologyScheduling
             InitializeComponent();
         }
 
-        //The Shown even takes place after the form is first displayed on the screen
+        //The Shown event takes place after the form is first displayed on the screen
         private void Form1_Shown(object sender, EventArgs e)
         {
             Login();
 
             if (validLogin)
+            {
                 //Redraw the schedule
                 s.Update();
+
+                // Redraw appointments
+            }
         }
 
         //The Paint event takes place any time the form is resized/minimized/maximized
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (validLogin)
-                s.Update(); //Redraw schedule
+            {
+                //Redraw schedule
+                s.Update();
+
+                // Redraw appointments
+            }
+        }
+
+        private List<Appointment> FindApptsThisWeek()
+        {
+            List<Appointment> apptList = new List<Appointment>();
+
+            if ((int)DateTime.Today.DayOfWeek > 4)
+            {
+
+            }
         }
 
         private void ShowApptBox()
@@ -74,11 +93,6 @@ namespace CosmetologyScheduling
             HideApptBox();
         }
 
-        private void DrawAppointment(Appointment app)
-        {
-            //TODO: Figure this out
-        }
-
         private void searchCustButton_Click(object sender, EventArgs e)
         {
             CustLookup custLookup = new CustLookup();
@@ -111,13 +125,13 @@ namespace CosmetologyScheduling
         {
             if (validLogin)
             {
-                s.Erase();
                 nameLabel.Text = "";
                 userInfoButton.Text = "&Log In";
                 currentUser = null;
                 logOutButton.Text = "E&xit";
                 validLogin = false;
                 HideButtons();
+                s.Erase();
             }
             else
             {

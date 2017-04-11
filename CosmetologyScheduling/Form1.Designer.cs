@@ -64,6 +64,7 @@
             // nameLabel
             // 
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameLabel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.nameLabel.Location = new System.Drawing.Point(473, 9);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(299, 13);
@@ -397,6 +398,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.apptButton);
