@@ -1,4 +1,6 @@
-﻿using System;
+﻿// This file is an even mixture of both of us
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,12 +19,14 @@ namespace CosmetologyScheduling
     {
 
         int counter = 0;
-        string customerName;
+        Customer cust;
+
         public CustLookup()
         {
             InitializeComponent();
         }
 
+		// Anthony's code
         private string FormatPhone(string phone)
         {
             //Creates a Regular Expression to remove symbols from phone number
@@ -33,6 +37,7 @@ namespace CosmetologyScheduling
             return phoneFixed;
         }
 
+		// mostly anthony
         private void searchButton_Click(object sender, EventArgs e)
         {
             SqlDataReader rdr = null;
@@ -73,17 +78,18 @@ namespace CosmetologyScheduling
                 List<string> results = new List<string>();
                 while (rdr.Read())
                 {
-                    Customer cust = new Customer(Convert.ToInt32(rdr[0]));
-                    outputListView.Items.Add(cust.FirstName);
-                    outputListView.Items[counter].SubItems.Add(cust.LastName);
-                    outputListView.Items[counter].SubItems.Add(EditPhone(cust.Phone));
-                    outputListView.Items[counter].SubItems.Add(cust.Email);
-                    outputListView.Items[counter].SubItems.Add(cust.Address);
-                    outputListView.Items[counter].SubItems.Add(cust.City);
-                    outputListView.Items[counter].SubItems.Add(cust.State);
-                    outputListView.Items[counter].SubItems.Add(cust.Zip);
-                    outputListView.Items[counter].SubItems.Add(cust.IsBanned.ToString());
-                    outputListView.Items[counter].SubItems.Add(cust.Memo);
+					// This secion is Scott's
+                    Customer tempCust = new Customer(Convert.ToInt32(rdr[0]));
+                    outputListView.Items.Add(tempCust.FirstName);
+                    outputListView.Items[counter].SubItems.Add(tempCust.LastName);
+                    outputListView.Items[counter].SubItems.Add(EditPhone(tempCust.Phone));
+                    outputListView.Items[counter].SubItems.Add(tempCust.Email);
+                    outputListView.Items[counter].SubItems.Add(tempCust.Address);
+                    outputListView.Items[counter].SubItems.Add(tempCust.City);
+                    outputListView.Items[counter].SubItems.Add(tempCust.State);
+                    outputListView.Items[counter].SubItems.Add(tempCust.Zip);
+                    outputListView.Items[counter].SubItems.Add(tempCust.IsBanned.ToString());
+                    outputListView.Items[counter].SubItems.Add(tempCust.Memo);
                     ResizeListViewColumns(outputListView);
                     counter++;
                 }
@@ -108,6 +114,7 @@ namespace CosmetologyScheduling
 
         }
 
+		// Most of the rest is Scott's code
         private string EditPhone(string x)
         {
             //(333)333-3333
@@ -138,15 +145,13 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            Form1 frm = new Form1();
-            customerName = fNameCol.ToString() + " " + lNameCol.ToString();
             
         }
 
 
-        public string CustomerName
+        public Customer Cust
         {
-            get { return customerName; }
+            get { return cust; }
         }
     }
 }

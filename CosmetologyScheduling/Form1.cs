@@ -17,6 +17,7 @@ namespace CosmetologyScheduling
         Schedule s = new Schedule();
         bool validLogin;
         User currentUser;
+        Customer cust;
 
         public Form1()
         {
@@ -57,6 +58,8 @@ namespace CosmetologyScheduling
             {
 
             }
+
+            return apptList;
         }
 
         private void ShowApptBox()
@@ -106,7 +109,7 @@ namespace CosmetologyScheduling
 
             if (custLookup.ShowDialog(this) == DialogResult.OK)
             {
-
+                cust = custLookup.Cust;
             }
             else
             {
@@ -198,6 +201,7 @@ namespace CosmetologyScheduling
             login.Dispose();
         }
 
+		//Scott's code is this one method (and the call for it in the apptButton_Click method)
         private void LoadServices()
         {
             SqlDataReader rdr = null;
