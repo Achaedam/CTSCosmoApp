@@ -44,12 +44,12 @@ namespace CosmetologyScheduling
             SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
+            string phone = FormatPhone(phoneTextBox.Text.ToString());
+
             string queryString = "";
 
-            if (string.IsNullOrEmpty(phoneTextBox.Text))
+            if (string.IsNullOrEmpty(phone))
             {
-                string phone = FormatPhone(phoneTextBox.Text.ToString());
-
                 queryString = "SELECT * FROM CUSTOMER WHERE CustPhone=@phone;";
 
                 param.ParameterName = "@phone";

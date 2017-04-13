@@ -77,6 +77,7 @@ namespace CosmetologyScheduling
 
         private void apptButton_Click(object sender, EventArgs e)
         {
+
             if (validLogin && apptGroupBox.Visible == false)
             {
                 ShowApptBox();
@@ -86,11 +87,10 @@ namespace CosmetologyScheduling
                 HideApptBox();
             }
 
-
             LoadServices();
-
-
-
+            startDatePicker.Value = DateTime.Now;
+            startTimePicker.Value = DateTime.Now;
+            
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -183,12 +183,14 @@ namespace CosmetologyScheduling
             validLogin = login.ValidLogin;
             string username = login.Username;
 
+            validLogin = true;
+
             if (validLogin)
             {
-                currentUser = new User(username);
+                //currentUser = new User(username);
 
                 // Update name label and buttons
-                nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
+                //nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
                 userInfoButton.Text = "Show &Info";
                 logOutButton.Text = "&Log Out";
 
@@ -201,7 +203,51 @@ namespace CosmetologyScheduling
             login.Dispose();
         }
 
-		//Scott's code is this one method (and the call for it in the apptButton_Click method)
+
+        private void LoadStylist()
+        {
+            SqlDataReader rdr = null;
+            SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlParameter param = new SqlParameter();
+
+            string queryString = "";
+
+            queryString = "INSERT INTO APPOINTMENT ;";
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(queryString, conn);
+
+                rdr = cmd.ExecuteReader();
+
+                List<string> results = new List<string>();
+                while (rdr.Read())
+                {
+                    User stylistName = new User(rdr[0].ToString());
+                    stylistDropDown.Items.Add(stylistName.FirstName + stylistName.LastName);
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            finally
+            {
+                if (rdr != null)
+                    rdr.Close();
+                if (conn != null)
+                    conn.Close();
+            }
+        }
+
         private void LoadServices()
         {
             SqlDataReader rdr = null;
@@ -223,7 +269,7 @@ namespace CosmetologyScheduling
                 List<string> results = new List<string>();
                 while (rdr.Read())
                 {
-                    Service sCode = new Service();
+                    Service sCode = new Service(Convert.ToString(rdr[0]));
                     servicesListBox.Items.Add(sCode.ServiceCode.ToString() + " " + sCode.ServiceName.ToString() + " " + sCode.Cost.ToString() + " " + sCode.EstimatedTime.ToString() + " " + sCode.CanOverlap.ToString());
 
                 }

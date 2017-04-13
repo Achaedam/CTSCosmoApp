@@ -42,7 +42,6 @@
             this.servicesLabel = new System.Windows.Forms.Label();
             this.servicesListBox = new System.Windows.Forms.ListBox();
             this.startTimeLabel = new System.Windows.Forms.Label();
-            this.compTimeLabel = new System.Windows.Forms.Label();
             this.stationLabel = new System.Windows.Forms.Label();
             this.stationComboBox = new System.Windows.Forms.ComboBox();
             this.empObservingLabel = new System.Windows.Forms.Label();
@@ -53,8 +52,6 @@
             this.submitButton = new System.Windows.Forms.Button();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.compDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.compTimePicker = new System.Windows.Forms.DateTimePicker();
             this.apptGroupBox = new System.Windows.Forms.GroupBox();
             this.apptButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
@@ -108,7 +105,7 @@
             // editButton
             // 
             this.editButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.editButton.Location = new System.Drawing.Point(22, 435);
+            this.editButton.Location = new System.Drawing.Point(22, 371);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(75, 23);
             this.editButton.TabIndex = 5;
@@ -204,21 +201,11 @@
             this.startTimeLabel.TabIndex = 12;
             this.startTimeLabel.Text = "Start Time:";
             // 
-            // compTimeLabel
-            // 
-            this.compTimeLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.compTimeLabel.AutoSize = true;
-            this.compTimeLabel.Location = new System.Drawing.Point(6, 241);
-            this.compTimeLabel.Name = "compTimeLabel";
-            this.compTimeLabel.Size = new System.Drawing.Size(86, 13);
-            this.compTimeLabel.TabIndex = 14;
-            this.compTimeLabel.Text = "Completed Time:";
-            // 
             // stationLabel
             // 
             this.stationLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.stationLabel.AutoSize = true;
-            this.stationLabel.Location = new System.Drawing.Point(6, 292);
+            this.stationLabel.Location = new System.Drawing.Point(6, 247);
             this.stationLabel.Name = "stationLabel";
             this.stationLabel.Size = new System.Drawing.Size(83, 13);
             this.stationLabel.TabIndex = 16;
@@ -228,7 +215,17 @@
             // 
             this.stationComboBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.stationComboBox.FormattingEnabled = true;
-            this.stationComboBox.Location = new System.Drawing.Point(95, 289);
+            this.stationComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.stationComboBox.Location = new System.Drawing.Point(95, 244);
             this.stationComboBox.Name = "stationComboBox";
             this.stationComboBox.Size = new System.Drawing.Size(99, 21);
             this.stationComboBox.TabIndex = 17;
@@ -237,7 +234,7 @@
             // 
             this.empObservingLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.empObservingLabel.AutoSize = true;
-            this.empObservingLabel.Location = new System.Drawing.Point(7, 323);
+            this.empObservingLabel.Location = new System.Drawing.Point(7, 278);
             this.empObservingLabel.Name = "empObservingLabel";
             this.empObservingLabel.Size = new System.Drawing.Size(155, 13);
             this.empObservingLabel.TabIndex = 18;
@@ -246,7 +243,7 @@
             // empObservingTextBox
             // 
             this.empObservingTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.empObservingTextBox.Location = new System.Drawing.Point(9, 339);
+            this.empObservingTextBox.Location = new System.Drawing.Point(9, 294);
             this.empObservingTextBox.Name = "empObservingTextBox";
             this.empObservingTextBox.Size = new System.Drawing.Size(185, 20);
             this.empObservingTextBox.TabIndex = 19;
@@ -255,7 +252,7 @@
             // 
             this.noOverlapCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.noOverlapCheckBox.AutoSize = true;
-            this.noOverlapCheckBox.Location = new System.Drawing.Point(9, 365);
+            this.noOverlapCheckBox.Location = new System.Drawing.Point(9, 320);
             this.noOverlapCheckBox.Name = "noOverlapCheckBox";
             this.noOverlapCheckBox.Size = new System.Drawing.Size(100, 17);
             this.noOverlapCheckBox.TabIndex = 20;
@@ -266,7 +263,7 @@
             // 
             this.compCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.compCheckBox.AutoSize = true;
-            this.compCheckBox.Location = new System.Drawing.Point(9, 388);
+            this.compCheckBox.Location = new System.Drawing.Point(9, 343);
             this.compCheckBox.Name = "compCheckBox";
             this.compCheckBox.Size = new System.Drawing.Size(76, 17);
             this.compCheckBox.TabIndex = 21;
@@ -276,7 +273,7 @@
             // clearButton
             // 
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.clearButton.Location = new System.Drawing.Point(104, 435);
+            this.clearButton.Location = new System.Drawing.Point(104, 371);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 22;
@@ -287,7 +284,7 @@
             // submitButton
             // 
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.submitButton.Location = new System.Drawing.Point(22, 435);
+            this.submitButton.Location = new System.Drawing.Point(22, 371);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 23);
             this.submitButton.TabIndex = 23;
@@ -313,32 +310,12 @@
             this.startTimePicker.ShowUpDown = true;
             this.startTimePicker.Size = new System.Drawing.Size(90, 20);
             this.startTimePicker.TabIndex = 25;
-            // 
-            // compDatePicker
-            // 
-            this.compDatePicker.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.compDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.compDatePicker.Location = new System.Drawing.Point(9, 257);
-            this.compDatePicker.Name = "compDatePicker";
-            this.compDatePicker.Size = new System.Drawing.Size(80, 20);
-            this.compDatePicker.TabIndex = 26;
-            // 
-            // compTimePicker
-            // 
-            this.compTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.compTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.compTimePicker.Location = new System.Drawing.Point(104, 257);
-            this.compTimePicker.Name = "compTimePicker";
-            this.compTimePicker.ShowUpDown = true;
-            this.compTimePicker.Size = new System.Drawing.Size(90, 20);
-            this.compTimePicker.TabIndex = 27;
+            this.startTimePicker.Value = new System.DateTime(2017, 4, 13, 9, 49, 7, 0);
             // 
             // apptGroupBox
             // 
             this.apptGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.apptGroupBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.apptGroupBox.Controls.Add(this.compTimePicker);
-            this.apptGroupBox.Controls.Add(this.compDatePicker);
             this.apptGroupBox.Controls.Add(this.startTimePicker);
             this.apptGroupBox.Controls.Add(this.startDatePicker);
             this.apptGroupBox.Controls.Add(this.submitButton);
@@ -349,7 +326,6 @@
             this.apptGroupBox.Controls.Add(this.empObservingLabel);
             this.apptGroupBox.Controls.Add(this.stationComboBox);
             this.apptGroupBox.Controls.Add(this.stationLabel);
-            this.apptGroupBox.Controls.Add(this.compTimeLabel);
             this.apptGroupBox.Controls.Add(this.startTimeLabel);
             this.apptGroupBox.Controls.Add(this.servicesListBox);
             this.apptGroupBox.Controls.Add(this.servicesLabel);
@@ -361,9 +337,9 @@
             this.apptGroupBox.Controls.Add(this.stylistLabel);
             this.apptGroupBox.Controls.Add(this.editButton);
             this.apptGroupBox.Enabled = false;
-            this.apptGroupBox.Location = new System.Drawing.Point(572, 47);
+            this.apptGroupBox.Location = new System.Drawing.Point(572, 111);
             this.apptGroupBox.Name = "apptGroupBox";
-            this.apptGroupBox.Size = new System.Drawing.Size(200, 471);
+            this.apptGroupBox.Size = new System.Drawing.Size(200, 407);
             this.apptGroupBox.TabIndex = 4;
             this.apptGroupBox.TabStop = false;
             this.apptGroupBox.Text = "Appointments";
@@ -435,7 +411,6 @@
         private System.Windows.Forms.Label servicesLabel;
         private System.Windows.Forms.ListBox servicesListBox;
         private System.Windows.Forms.Label startTimeLabel;
-        private System.Windows.Forms.Label compTimeLabel;
         private System.Windows.Forms.Label stationLabel;
         private System.Windows.Forms.ComboBox stationComboBox;
         private System.Windows.Forms.Label empObservingLabel;
@@ -446,8 +421,6 @@
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.DateTimePicker startDatePicker;
         private System.Windows.Forms.DateTimePicker startTimePicker;
-        private System.Windows.Forms.DateTimePicker compDatePicker;
-        private System.Windows.Forms.DateTimePicker compTimePicker;
         private System.Windows.Forms.GroupBox apptGroupBox;
         private System.Windows.Forms.Button apptButton;
         private System.Windows.Forms.Button settingsButton;

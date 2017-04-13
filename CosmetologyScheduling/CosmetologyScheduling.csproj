@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SCCCosmetology">
-      <HintPath>..\..\..\Group Project\ClassFiles\SCCCosmetology\SCCCosmetology\bin\Debug\SCCCosmetology.dll</HintPath>
+    <Reference Include="SCCCosmetology, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\SCCCosmetology.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -55,3 +55,12 @@ C:\Users\utta2\Desktop\GitRepo\trunk\CosmetologyScheduling\obj\Debug\Cosmetology
 E:\CTS 289\master Proj\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe.config
 E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.exe
 E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.pdb
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\bin\Debug\SCCCosmetology.pdb
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csprojResolveAssemblyReference.cache
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustLookup.resources
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Form1.resources
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.LoginForm.resources
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.Properties.Resources.resources
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
