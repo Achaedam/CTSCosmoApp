@@ -52,3 +52,6 @@ C:\Users\utta2\Desktop\GitRepo\trunk\CosmetologyScheduling\obj\Debug\Cosmetology
 ||||||| .r6
 >>>>>>> .r3
 >>>>>>> .r6
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\bin\Debug\CosmetologyScheduling.exe.config
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.exe
+E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.pdb

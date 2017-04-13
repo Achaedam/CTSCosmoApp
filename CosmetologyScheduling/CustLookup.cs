@@ -17,6 +17,7 @@ namespace CosmetologyScheduling
     {
 
         int counter = 0;
+        string customerName;
         public CustLookup()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace CosmetologyScheduling
 
             string queryString = "";
 
-            if (phoneTextBox.Text.ToString() != "")
+            if (string.IsNullOrEmpty(phoneTextBox.Text))
             {
                 string phone = FormatPhone(phoneTextBox.Text.ToString());
 
@@ -123,6 +124,29 @@ namespace CosmetologyScheduling
             {
                 column.Width = -2;
             }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void outputListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            submitButton.Enabled = true;
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            customerName = fNameCol.ToString() + " " + lNameCol.ToString();
+            
+        }
+
+
+        public string CustomerName
+        {
+            get { return customerName; }
         }
     }
 }

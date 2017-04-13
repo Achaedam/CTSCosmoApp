@@ -109,6 +109,7 @@
             this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // submitButton
             // 
@@ -119,6 +120,7 @@
             this.submitButton.TabIndex = 8;
             this.submitButton.Text = "&Submit";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // outputListView
             // 
@@ -139,6 +141,7 @@
             this.outputListView.TabIndex = 10;
             this.outputListView.UseCompatibleStateImageBehavior = false;
             this.outputListView.View = System.Windows.Forms.View.Details;
+            this.outputListView.SelectedIndexChanged += new System.EventHandler(this.outputListView_SelectedIndexChanged);
             // 
             // fNameCol
             // 

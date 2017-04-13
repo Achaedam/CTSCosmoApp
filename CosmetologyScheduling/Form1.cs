@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SCCCosmetology;
+using System.Data.SqlClient;
 
 namespace CosmetologyScheduling
 {
@@ -81,6 +82,12 @@ namespace CosmetologyScheduling
             {
                 HideApptBox();
             }
+
+
+            LoadServices();
+
+
+
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -190,5 +197,51 @@ namespace CosmetologyScheduling
 
             login.Dispose();
         }
+
+        private void LoadServices()
+        {
+            SqlDataReader rdr = null;
+            SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlParameter param = new SqlParameter();
+
+            string queryString = "";
+
+            queryString = "SELECT * FROM SALON_SERVICE;";
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(queryString, conn);
+
+                rdr = cmd.ExecuteReader();
+
+                List<string> results = new List<string>();
+                while (rdr.Read())
+                {
+                    Service sCode = new Service();
+                    servicesListBox.Items.Add(sCode.ServiceCode.ToString() + " " + sCode.ServiceName.ToString() + " " + sCode.Cost.ToString() + " " + sCode.EstimatedTime.ToString() + " " + sCode.CanOverlap.ToString());
+
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            finally
+            {
+                if (rdr != null)
+                    rdr.Close();
+                if (conn != null)
+                    conn.Close();
+            }
+        }
+
     }
 }
