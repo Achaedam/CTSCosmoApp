@@ -41,7 +41,7 @@ namespace CosmetologyScheduling
         private void searchButton_Click(object sender, EventArgs e)
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string phone = FormatPhone(phoneTextBox.Text.ToString());

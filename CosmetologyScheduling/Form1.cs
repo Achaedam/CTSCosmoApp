@@ -64,8 +64,12 @@ namespace CosmetologyScheduling
 
         private void ShowApptBox()
         {
-                apptGroupBox.Enabled = true;
-                apptGroupBox.Visible = true;
+            apptGroupBox.Enabled = true;
+            apptGroupBox.Visible = true;
+
+            LoadServices();
+            startDatePicker.Value = DateTime.Now;
+            startTimePicker.Value = DateTime.Now;
         }
 
         private void HideApptBox()
@@ -86,11 +90,6 @@ namespace CosmetologyScheduling
             {
                 HideApptBox();
             }
-
-            LoadServices();
-            startDatePicker.Value = DateTime.Now;
-            startTimePicker.Value = DateTime.Now;
-            
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -187,10 +186,10 @@ namespace CosmetologyScheduling
 
             if (validLogin)
             {
-                //currentUser = new User(username);
+                currentUser = new User(username);
 
                 // Update name label and buttons
-                //nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
+                nameLabel.Text = currentUser.FirstName + " " + currentUser.LastName;
                 userInfoButton.Text = "Show &Info";
                 logOutButton.Text = "&Log Out";
 
@@ -207,7 +206,7 @@ namespace CosmetologyScheduling
         private void LoadStylist()
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string queryString = "";
@@ -251,7 +250,7 @@ namespace CosmetologyScheduling
         private void LoadServices()
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:75.177.127.12,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string queryString = "";
