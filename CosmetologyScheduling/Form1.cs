@@ -62,12 +62,9 @@ namespace CosmetologyScheduling
             return apptList;
         }
 
-        private DateTime FindNextSunday(DateTime start)
+        private DateTime FindNextSunday()
         {
-            DateTime finish;
-
-            finish = start.AddDays(7 - ((int)DateTime.Today.DayOfWeek));
-
+            DateTime finish = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day + (7 - ((int)DateTime.Today.DayOfWeek)), 0, 0, 0);
             return finish;
         }
 
