@@ -29,12 +29,15 @@ namespace CosmetologyScheduling
         {
             Login();
 
+            FindApptsThisWeek();
+
             if (validLogin)
             {
                 //Redraw the schedule
                 s.Update();
 
                 // Redraw appointments
+                DrawAppointments(FindApptsThisWeek());
             }
         }
 
@@ -47,24 +50,87 @@ namespace CosmetologyScheduling
                 s.Update();
 
                 // Redraw appointments
+                DrawAppointments(FindApptsThisWeek());
             }
         }
 
         private List<Appointment> FindApptsThisWeek()
         {
+            DateTime targetWeek;
+            List<string> jobs = new List<string>();
             List<Appointment> apptList = new List<Appointment>();
 
             if ((int)DateTime.Today.DayOfWeek > 4)
             {
+                targetWeek = FindNextSunday();
+            }
+            else
+            {
+                targetWeek = FindThisSunday();
+            }
 
+            SqlDataReader rdr = null;
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
+
+            string queryString = "SELECT JobNumber from APPOINTMENT WHERE StartTime>@start AND StartTime<@end;";
+
+            try
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(queryString, conn);
+
+                cmd.Parameters.Add("@start", SqlDbType.DateTime).Value = targetWeek;
+                cmd.Parameters.Add("@end", SqlDbType.DateTime).Value = targetWeek.AddDays(5);
+
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    jobs.Add(rdr[0].ToString());
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+            }
+            finally
+            {
+                if (rdr != null)
+                    rdr.Close();
+                if (conn != null)
+                    conn.Close();
+            }
+
+            foreach (string value in jobs)
+            {
+                apptList.Add(new Appointment(int.Parse(value)));
             }
 
             return apptList;
         }
 
+        private void DrawAppointments(List<Appointment> appList)
+        {
+            foreach (Appointment app in appList)
+            {
+                app.Draw(s);
+            }
+        }
+
         private DateTime FindNextSunday()
         {
-            DateTime finish = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day + (7 - ((int)DateTime.Today.DayOfWeek)), 0, 0, 0);
+            DateTime finish = DateTime.Today.AddDays(7 - (int)DateTime.Today.DayOfWeek);
+            return finish;
+        }
+
+        private DateTime FindThisSunday()
+        {
+            DateTime finish = DateTime.Today.AddDays((int)DateTime.Today.DayOfWeek * -1);
             return finish;
         }
 
@@ -188,8 +254,6 @@ namespace CosmetologyScheduling
             validLogin = login.ValidLogin;
             string username = login.Username;
 
-            validLogin = true;
-
             if (validLogin)
             {
                 currentUser = new User(username);
@@ -208,11 +272,10 @@ namespace CosmetologyScheduling
             login.Dispose();
         }
 
-
         private void LoadStylist()
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string queryString = "";
@@ -256,7 +319,7 @@ namespace CosmetologyScheduling
         private void LoadServices()
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string queryString = "";
