@@ -62,6 +62,15 @@ namespace CosmetologyScheduling
             return apptList;
         }
 
+        private DateTime FindNextSunday(DateTime start)
+        {
+            DateTime finish;
+
+            finish = start.AddDays(7 - ((int)DateTime.Today.DayOfWeek));
+
+            return finish;
+        }
+
         private void ShowApptBox()
         {
             apptGroupBox.Enabled = true;
