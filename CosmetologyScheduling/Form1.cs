@@ -140,6 +140,8 @@ namespace CosmetologyScheduling
             apptGroupBox.Visible = true;
 
             LoadServices();
+            LoadStylist();
+
             startDatePicker.Value = DateTime.Now;
             startTimePicker.Value = DateTime.Now;
         }
@@ -181,6 +183,7 @@ namespace CosmetologyScheduling
             if (custLookup.ShowDialog(this) == DialogResult.OK)
             {
                 cust = custLookup.Cust;
+                customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
             }
             else
             {
@@ -280,7 +283,7 @@ namespace CosmetologyScheduling
 
             string queryString = "";
 
-            queryString = "INSERT INTO APPOINTMENT ;";
+            queryString = "SELECT * FROM EMPLOYEE;";
 
             try
             {
@@ -293,8 +296,12 @@ namespace CosmetologyScheduling
                 List<string> results = new List<string>();
                 while (rdr.Read())
                 {
+
                     User stylistName = new User(rdr[0].ToString());
-                    stylistDropDown.Items.Add(stylistName.FirstName + stylistName.LastName);
+                    stylistDropDown.Items.Add(stylistName.FirstName + " " + stylistName.LastName);
+                    //stylistDropDown.Items.Add(rdr[0].ToString());
+
+
                 }
 
 
@@ -338,8 +345,8 @@ namespace CosmetologyScheduling
                 while (rdr.Read())
                 {
                     Service sCode = new Service(Convert.ToString(rdr[0]));
-                    servicesListBox.Items.Add(sCode.ServiceCode.ToString() + " " + sCode.ServiceName.ToString() + " " + sCode.Cost.ToString() + " " + sCode.EstimatedTime.ToString() + " " + sCode.CanOverlap.ToString());
-
+                    servicesListBox.Items.Add(sCode.ServiceName.ToString());
+                    
                 }
 
 

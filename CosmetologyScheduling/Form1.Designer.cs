@@ -405,7 +405,6 @@
         private System.Windows.Forms.Label stylistLabel;
         private System.Windows.Forms.ComboBox stylistDropDown;
         private System.Windows.Forms.Label customerLabel;
-        private System.Windows.Forms.TextBox customerNameTextBox;
         private System.Windows.Forms.Button searchCustButton;
         private System.Windows.Forms.Button createCustButton;
         private System.Windows.Forms.Label servicesLabel;
@@ -424,6 +423,7 @@
         private System.Windows.Forms.GroupBox apptGroupBox;
         private System.Windows.Forms.Button apptButton;
         private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.TextBox customerNameTextBox;
     }
 }
 
