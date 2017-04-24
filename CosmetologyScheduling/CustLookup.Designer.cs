@@ -136,6 +136,7 @@
             this.bannedCol,
             this.memoCol});
             this.outputListView.Location = new System.Drawing.Point(12, 82);
+            this.outputListView.MultiSelect = false;
             this.outputListView.Name = "outputListView";
             this.outputListView.Size = new System.Drawing.Size(333, 97);
             this.outputListView.TabIndex = 10;

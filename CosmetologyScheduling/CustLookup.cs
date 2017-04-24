@@ -17,8 +17,7 @@ namespace CosmetologyScheduling
 {
     public partial class CustLookup : Form
     {
-
-        int counter = 0;
+        List<Customer> results;
         Customer cust;
 
         public CustLookup()
@@ -41,7 +40,7 @@ namespace CosmetologyScheduling
         private void searchButton_Click(object sender, EventArgs e)
         {
             SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsadmin;Password=ctsPROJECT!");
+            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
 
             string phone = FormatPhone(phoneTextBox.Text.ToString());
@@ -75,26 +74,26 @@ namespace CosmetologyScheduling
 
                 rdr = cmd.ExecuteReader();
 
-                List<string> results = new List<string>();
+                results = new List<Customer>();
                 while (rdr.Read())
                 {
-                    // This secion is Scott's
-                    Customer tempCust = new Customer(Convert.ToInt32(rdr[0]));
-                    outputListView.Items.Add(tempCust.FirstName);
-                    outputListView.Items[counter].SubItems.Add(tempCust.LastName);
-                    outputListView.Items[counter].SubItems.Add(EditPhone(tempCust.Phone));
-                    outputListView.Items[counter].SubItems.Add(tempCust.Email);
-                    outputListView.Items[counter].SubItems.Add(tempCust.Address);
-                    outputListView.Items[counter].SubItems.Add(tempCust.City);
-                    outputListView.Items[counter].SubItems.Add(tempCust.State);
-                    outputListView.Items[counter].SubItems.Add(tempCust.Zip);
-                    outputListView.Items[counter].SubItems.Add(tempCust.IsBanned.ToString());
-                    outputListView.Items[counter].SubItems.Add(tempCust.Memo);
-                    ResizeListViewColumns(outputListView);
-                    counter++;
-                    ;
+                    results.Add(new Customer(Convert.ToInt32(rdr[0])));
                 }
 
+                for (int counter = 0; counter < results.Count; counter++)
+                {
+                    outputListView.Items.Add(results[counter].FirstName);
+                    outputListView.Items[counter].SubItems.Add(results[counter].LastName);
+                    outputListView.Items[counter].SubItems.Add(EditPhone(results[counter].Phone));
+                    outputListView.Items[counter].SubItems.Add(results[counter].Email);
+                    outputListView.Items[counter].SubItems.Add(results[counter].Address);
+                    outputListView.Items[counter].SubItems.Add(results[counter].City);
+                    outputListView.Items[counter].SubItems.Add(results[counter].State);
+                    outputListView.Items[counter].SubItems.Add(results[counter].Zip);
+                    outputListView.Items[counter].SubItems.Add(results[counter].IsBanned.ToString());
+                    outputListView.Items[counter].SubItems.Add(results[counter].Memo);
+                    ResizeListViewColumns(outputListView);
+                }
 
             }
             catch (SqlException ex)
@@ -142,6 +141,7 @@ namespace CosmetologyScheduling
         private void outputListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             submitButton.Enabled = true;
+            cust = results[outputListView.SelectedIndices[0]];
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -153,7 +153,6 @@ namespace CosmetologyScheduling
         public Customer Cust
         {
             get { return cust; }
-            set { cust = value; }
         }
     }
 }

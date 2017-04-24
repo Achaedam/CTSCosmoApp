@@ -17,7 +17,13 @@ namespace CosmetologyScheduling
         Schedule s = new Schedule();
         bool validLogin;
         User currentUser;
+        
+        List<User> stylistList;
+        List<Service> serviceList;
+
+        User apptStylist;
         Customer cust;
+        Service apptServ;
 
         public Form1()
         {
@@ -118,8 +124,33 @@ namespace CosmetologyScheduling
         {
             foreach (Appointment app in appList)
             {
-                app.Draw(s);
+                app.Draw(s, FindColorByStylist(app));
             }
+        }
+
+        private Color FindColorByStylist(Appointment app)
+        {
+            int index = 0;
+
+            foreach (User stylist in stylistList)
+            {
+                if (stylist.Username == app.Stylist.Username)
+                {
+                    index = stylistList.IndexOf(stylist);
+                }
+            }
+
+            int r = (int)stylistList[index].Username.ToCharArray()[0];
+            int g = (int)stylistList[index].Username.ToCharArray()[stylistList[index].Username.ToCharArray().Length - 1];
+            int b = 0;
+            for (int i = 0; i < stylistList[index].Username.ToCharArray().Length; i++)
+            {
+                b += (int)stylistList[index].Username.ToCharArray()[i];
+            }
+
+            b = b % 256;
+
+            return Color.FromArgb(r, g, b);
         }
 
         private DateTime FindNextSunday()
@@ -138,19 +169,14 @@ namespace CosmetologyScheduling
         {
             apptGroupBox.Enabled = true;
             apptGroupBox.Visible = true;
-
-            LoadServices();
-            LoadStylist();
-
-            startDatePicker.Value = DateTime.Now;
-            startTimePicker.Value = DateTime.Now;
         }
 
         private void HideApptBox()
         {
-                apptGroupBox.Enabled = false;
-                apptGroupBox.Visible = false;
-                s.Update();
+            apptGroupBox.Enabled = false;
+            apptGroupBox.Visible = false;
+            s.Update();
+            DrawAppointments(FindApptsThisWeek());
         }
 
         private void apptButton_Click(object sender, EventArgs e)
@@ -168,7 +194,23 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            HideApptBox();
+            Appointment appt = new Appointment();
+
+            appt.Stylist = apptStylist;
+            appt.Cust = cust;
+            appt.Serv = apptServ;
+            appt.StartTime = startDatePicker.Value.Date.Add(startTimePicker.Value.TimeOfDay);
+            appt.StationNumber = Convert.ToInt32(stationComboBox.Items[stationComboBox.SelectedIndex]);
+            appt.EmployeeObserving = empObservingTextBox.Text.ToString();
+
+            if (appt.SendToDB())
+            {
+                HideApptBox();
+            }
+            else
+            {
+                MessageBox.Show("Error communicating with server. Please try again later.");
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -180,15 +222,10 @@ namespace CosmetologyScheduling
         {
             CustLookup custLookup = new CustLookup();
 
-            if (custLookup.ShowDialog(this) == DialogResult.OK)
-            {
-                cust = custLookup.Cust;
-                customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
-            }
-            else
-            {
+            custLookup.ShowDialog();
 
-            }
+            cust = custLookup.Cust;
+            customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
 
             custLookup.Dispose();
         }
@@ -197,7 +234,11 @@ namespace CosmetologyScheduling
         {
             if (validLogin)
             {
-                //TODO: Show user info
+                MessageBox.Show("Name: " + currentUser.FirstName + " " + currentUser.LastName +
+                                "\nUsername: " + currentUser.Username +
+                                "\nID Number: " + currentUser.IDNumber +
+                                "\nStylist: " + currentUser.IsStylist.ToString() +
+                                "\nAdmin: " + currentUser.IsAdmin.ToString());
             }
             else
             {
@@ -277,96 +318,133 @@ namespace CosmetologyScheduling
 
         private void LoadStylist()
         {
-            SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
-            SqlParameter param = new SqlParameter();
-
-            string queryString = "";
-
-            queryString = "SELECT * FROM EMPLOYEE;";
-
-            try
+            if (stylistList == null)
             {
-                conn.Open();
+                SqlDataReader rdr = null;
+                SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
+                SqlParameter param = new SqlParameter();
 
-                SqlCommand cmd = new SqlCommand(queryString, conn);
+                string queryString = "";
 
-                rdr = cmd.ExecuteReader();
+                queryString = "SELECT * FROM EMPLOYEE;";
 
-                List<string> results = new List<string>();
-                while (rdr.Read())
+                try
                 {
+                    conn.Open();
 
-                    User stylistName = new User(rdr[0].ToString());
-                    stylistDropDown.Items.Add(stylistName.FirstName + " " + stylistName.LastName);
-                    //stylistDropDown.Items.Add(rdr[0].ToString());
+                    SqlCommand cmd = new SqlCommand(queryString, conn);
 
+                    rdr = cmd.ExecuteReader();
+
+                    stylistList = new List<User>();
+                    while (rdr.Read())
+                    {
+                        stylistList.Add(new User(rdr[0].ToString()));
+                    }
+
+                    foreach (User stylistName in stylistList)
+                    {
+                        stylistDropDown.Items.Add(stylistName.FirstName + " " + stylistName.LastName);
+                    }
 
                 }
-
-
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
-            }
-            finally
-            {
-                if (rdr != null)
-                    rdr.Close();
-                if (conn != null)
-                    conn.Close();
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+                }
+                finally
+                {
+                    if (rdr != null)
+                        rdr.Close();
+                    if (conn != null)
+                        conn.Close();
+                }
             }
         }
 
         private void LoadServices()
         {
-            SqlDataReader rdr = null;
-            SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
-            SqlParameter param = new SqlParameter();
-
-            string queryString = "";
-
-            queryString = "SELECT * FROM SALON_SERVICE;";
-
-            try
+            if (serviceList == null)
             {
-                conn.Open();
+                SqlDataReader rdr = null;
+                SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
+                SqlParameter param = new SqlParameter();
 
-                SqlCommand cmd = new SqlCommand(queryString, conn);
+                string queryString = "";
 
-                rdr = cmd.ExecuteReader();
+                queryString = "SELECT * FROM SALON_SERVICE;";
 
-                List<string> results = new List<string>();
-                while (rdr.Read())
+                try
                 {
-                    Service sCode = new Service(Convert.ToString(rdr[0]));
-                    servicesListBox.Items.Add(sCode.ServiceName.ToString());
-                    
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(queryString, conn);
+
+                    rdr = cmd.ExecuteReader();
+
+                    serviceList = new List<Service>();
+                    while (rdr.Read())
+                    {
+                        serviceList.Add(new Service(rdr[0].ToString()));
+                    }
+
+                    foreach (Service sCode in serviceList)
+                    {
+                        servicesListBox.Items.Add(sCode.ServiceName.ToString());
+                    }
+
                 }
-
-
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
-            }
-            finally
-            {
-                if (rdr != null)
-                    rdr.Close();
-                if (conn != null)
-                    conn.Close();
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Source: " + ex.Source + "\nMessage: " + ex.Message + "\nStackTrace: " + ex.StackTrace);
+                }
+                finally
+                {
+                    if (rdr != null)
+                        rdr.Close();
+                    if (conn != null)
+                        conn.Close();
+                }
             }
         }
 
+        private void createCustButton_Click(object sender, EventArgs e)
+        {
+            CustCreate custCreate = new CustCreate();
+
+            custCreate.ShowDialog();
+
+            cust = custCreate.NewCust;
+            customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
+
+            custCreate.Dispose();
+        }
+
+        private void stylistDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            apptStylist = stylistList[stylistDropDown.SelectedIndex];
+        }
+
+        private void servicesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            apptServ = serviceList[servicesListBox.SelectedIndex];
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadServices();
+            LoadStylist();
+
+            startDatePicker.Value = DateTime.Now;
+            startTimePicker.Value = DateTime.Now;
+        }
     }
 }

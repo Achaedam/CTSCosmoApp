@@ -46,8 +46,6 @@
             this.stationComboBox = new System.Windows.Forms.ComboBox();
             this.empObservingLabel = new System.Windows.Forms.Label();
             this.empObservingTextBox = new System.Windows.Forms.TextBox();
-            this.noOverlapCheckBox = new System.Windows.Forms.CheckBox();
-            this.compCheckBox = new System.Windows.Forms.CheckBox();
             this.clearButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
@@ -105,7 +103,7 @@
             // editButton
             // 
             this.editButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.editButton.Location = new System.Drawing.Point(22, 371);
+            this.editButton.Location = new System.Drawing.Point(22, 325);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(75, 23);
             this.editButton.TabIndex = 5;
@@ -130,6 +128,7 @@
             this.stylistDropDown.Name = "stylistDropDown";
             this.stylistDropDown.Size = new System.Drawing.Size(144, 21);
             this.stylistDropDown.TabIndex = 5;
+            this.stylistDropDown.SelectedIndexChanged += new System.EventHandler(this.stylistDropDown_SelectedIndexChanged);
             // 
             // customerLabel
             // 
@@ -170,6 +169,7 @@
             this.createCustButton.TabIndex = 9;
             this.createCustButton.Text = "&Create";
             this.createCustButton.UseVisualStyleBackColor = true;
+            this.createCustButton.Click += new System.EventHandler(this.createCustButton_Click);
             // 
             // servicesLabel
             // 
@@ -190,6 +190,7 @@
             this.servicesListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.servicesListBox.Size = new System.Drawing.Size(185, 82);
             this.servicesListBox.TabIndex = 11;
+            this.servicesListBox.SelectedIndexChanged += new System.EventHandler(this.servicesListBox_SelectedIndexChanged);
             // 
             // startTimeLabel
             // 
@@ -248,32 +249,10 @@
             this.empObservingTextBox.Size = new System.Drawing.Size(185, 20);
             this.empObservingTextBox.TabIndex = 19;
             // 
-            // noOverlapCheckBox
-            // 
-            this.noOverlapCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.noOverlapCheckBox.AutoSize = true;
-            this.noOverlapCheckBox.Location = new System.Drawing.Point(9, 320);
-            this.noOverlapCheckBox.Name = "noOverlapCheckBox";
-            this.noOverlapCheckBox.Size = new System.Drawing.Size(100, 17);
-            this.noOverlapCheckBox.TabIndex = 20;
-            this.noOverlapCheckBox.Text = "No Overlapping";
-            this.noOverlapCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // compCheckBox
-            // 
-            this.compCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.compCheckBox.AutoSize = true;
-            this.compCheckBox.Location = new System.Drawing.Point(9, 343);
-            this.compCheckBox.Name = "compCheckBox";
-            this.compCheckBox.Size = new System.Drawing.Size(76, 17);
-            this.compCheckBox.TabIndex = 21;
-            this.compCheckBox.Text = "Completed";
-            this.compCheckBox.UseVisualStyleBackColor = true;
-            // 
             // clearButton
             // 
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.clearButton.Location = new System.Drawing.Point(104, 371);
+            this.clearButton.Location = new System.Drawing.Point(104, 325);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 22;
@@ -284,7 +263,7 @@
             // submitButton
             // 
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.submitButton.Location = new System.Drawing.Point(22, 371);
+            this.submitButton.Location = new System.Drawing.Point(22, 325);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 23);
             this.submitButton.TabIndex = 23;
@@ -320,8 +299,6 @@
             this.apptGroupBox.Controls.Add(this.startDatePicker);
             this.apptGroupBox.Controls.Add(this.submitButton);
             this.apptGroupBox.Controls.Add(this.clearButton);
-            this.apptGroupBox.Controls.Add(this.compCheckBox);
-            this.apptGroupBox.Controls.Add(this.noOverlapCheckBox);
             this.apptGroupBox.Controls.Add(this.empObservingTextBox);
             this.apptGroupBox.Controls.Add(this.empObservingLabel);
             this.apptGroupBox.Controls.Add(this.stationComboBox);
@@ -337,9 +314,9 @@
             this.apptGroupBox.Controls.Add(this.stylistLabel);
             this.apptGroupBox.Controls.Add(this.editButton);
             this.apptGroupBox.Enabled = false;
-            this.apptGroupBox.Location = new System.Drawing.Point(572, 111);
+            this.apptGroupBox.Location = new System.Drawing.Point(572, 157);
             this.apptGroupBox.Name = "apptGroupBox";
-            this.apptGroupBox.Size = new System.Drawing.Size(200, 407);
+            this.apptGroupBox.Size = new System.Drawing.Size(200, 361);
             this.apptGroupBox.TabIndex = 4;
             this.apptGroupBox.TabStop = false;
             this.apptGroupBox.Text = "Appointments";
@@ -387,6 +364,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scheduling";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.apptGroupBox.ResumeLayout(false);
@@ -414,8 +392,6 @@
         private System.Windows.Forms.ComboBox stationComboBox;
         private System.Windows.Forms.Label empObservingLabel;
         private System.Windows.Forms.TextBox empObservingTextBox;
-        private System.Windows.Forms.CheckBox noOverlapCheckBox;
-        private System.Windows.Forms.CheckBox compCheckBox;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.DateTimePicker startDatePicker;
