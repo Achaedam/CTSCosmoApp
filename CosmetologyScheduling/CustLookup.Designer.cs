@@ -199,6 +199,7 @@
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.instructionLabel);
             this.Name = "CustLookup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Customer Lookup";
             this.ResumeLayout(false);
             this.PerformLayout();

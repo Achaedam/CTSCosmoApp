@@ -225,7 +225,8 @@ namespace CosmetologyScheduling
             custLookup.ShowDialog();
 
             cust = custLookup.Cust;
-            customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
+            if (cust != null)
+                customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
 
             custLookup.Dispose();
         }
@@ -423,8 +424,9 @@ namespace CosmetologyScheduling
             custCreate.ShowDialog();
 
             cust = custCreate.NewCust;
-            customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
-
+            if (cust != null)
+                customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
+    
             custCreate.Dispose();
         }
 
