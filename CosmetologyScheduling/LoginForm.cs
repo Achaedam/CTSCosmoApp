@@ -15,6 +15,7 @@ namespace CosmetologyScheduling
 {
     public partial class LoginForm : Form
     {
+        // Necessary values
         bool validLogin = false;
         string username;
 
@@ -30,6 +31,7 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            // This method handles input validation and user authentication
             if (usernameTextBox.Text.ToString() != "")
             {
                 if (passwordTextBox.Text.ToString() != "")

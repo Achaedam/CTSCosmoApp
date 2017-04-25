@@ -37,6 +37,7 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            // This method handles input validation and creates a new customer to send to the database
             string phone = FormatPhone(phoneTextBox.Text.ToString());
 
             if (!string.IsNullOrEmpty(firstNameTextBox.Text.ToString()))
@@ -56,7 +57,7 @@ namespace CosmetologyScheduling
                         newCust.State = stateTextBox.Text.ToString();
                         newCust.Zip = zipTextBox.Text.ToString();
 
-                        if (newCust.SendToDB())
+                        if (newCust.SendToDB()) // The Customer.SendToDB() method returns true if the command completes successfully
                         {
                             this.Close();
                         }

@@ -14,13 +14,16 @@ namespace CosmetologyScheduling
 {
     public partial class Form1 : Form
     {
+        // Objects necessary for form function
         Schedule s = new Schedule();
         bool validLogin;
         User currentUser;
         
+        // List objects for loading Users and Services from DBMS
         List<User> stylistList;
         List<Service> serviceList;
 
+        // Objects for creating appointments
         User apptStylist;
         Customer cust;
         Service apptServ;
@@ -47,7 +50,7 @@ namespace CosmetologyScheduling
             }
         }
 
-        //The Paint event takes place any time the form is resized/minimized/maximized
+        //The Resize event takes place any time the form is resized/minimized/maximized
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (validLogin)
@@ -62,10 +65,12 @@ namespace CosmetologyScheduling
 
         private List<Appointment> FindApptsThisWeek()
         {
+            // Object declaration
             DateTime targetWeek;
             List<string> jobs = new List<string>();
             List<Appointment> apptList = new List<Appointment>();
 
+            // Determining whether the work week (Tues-Thur) is over
             if ((int)DateTime.Today.DayOfWeek > 4)
             {
                 targetWeek = FindNextSunday();
@@ -75,13 +80,15 @@ namespace CosmetologyScheduling
                 targetWeek = FindThisSunday();
             }
 
+            // Creating SqlConnection and SqlReader objects for database query
             SqlDataReader rdr = null;
             SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
-
+            // String to find appointments from the selected week
             string queryString = "SELECT JobNumber from APPOINTMENT WHERE StartTime>@start AND StartTime<@end;";
 
             try
             {
+                // Beginning SqlConnection
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(queryString, conn);
@@ -112,6 +119,7 @@ namespace CosmetologyScheduling
                     conn.Close();
             }
 
+            // Adding appointment objects to apptList
             foreach (string value in jobs)
             {
                 apptList.Add(new Appointment(int.Parse(value)));
@@ -130,6 +138,11 @@ namespace CosmetologyScheduling
 
         private Color FindColorByStylist(Appointment app)
         {
+            // This method creates a unique RGB color for each stylist based on their username
+            // The R value is the int value of the first character
+            // The G value is the int value of the last character
+            // The B value is the int value of the sum of all the characters, mod 256 (my favorite one)
+
             int index = 0;
 
             foreach (User stylist in stylistList)
@@ -150,18 +163,18 @@ namespace CosmetologyScheduling
 
             b = b % 256;
 
-            return Color.FromArgb(r, g, b);
+            return Color.FromArgb(178, r, g, b);
         }
 
         private DateTime FindNextSunday()
         {
-            DateTime finish = DateTime.Today.AddDays(7 - (int)DateTime.Today.DayOfWeek);
+            DateTime finish = DateTime.Today.AddDays(7 - (int)DateTime.Today.DayOfWeek); // Math to find the date of next Sunday
             return finish;
         }
 
         private DateTime FindThisSunday()
         {
-            DateTime finish = DateTime.Today.AddDays((int)DateTime.Today.DayOfWeek * -1);
+            DateTime finish = DateTime.Today.AddDays((int)DateTime.Today.DayOfWeek * -1); // Math to find the date of last Sunday
             return finish;
         }
 
@@ -175,6 +188,18 @@ namespace CosmetologyScheduling
         {
             apptGroupBox.Enabled = false;
             apptGroupBox.Visible = false;
+
+            // Clearing all entries in the apptGroupBox
+            stylistDropDown.SelectedIndex = -1;
+            cust = null;
+            apptStylist = null;
+            apptServ = null;
+            customerNameTextBox.Text = "";
+            servicesListBox.SelectedIndex = -1;
+            stationComboBox.SelectedIndex = -1;
+            empObservingTextBox.Text = "";
+
+            // Updating the schedule and appointments drawn on the form
             s.Update();
             DrawAppointments(FindApptsThisWeek());
         }
@@ -194,6 +219,7 @@ namespace CosmetologyScheduling
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            // This method creates a new appointment object, assigns the necessary values, and sends it to the database
             Appointment appt = new Appointment();
 
             appt.Stylist = apptStylist;
@@ -203,7 +229,7 @@ namespace CosmetologyScheduling
             appt.StationNumber = Convert.ToInt32(stationComboBox.Items[stationComboBox.SelectedIndex]);
             appt.EmployeeObserving = empObservingTextBox.Text.ToString();
 
-            if (appt.SendToDB())
+            if (appt.SendToDB()) // The Appointment.SendToDB() method returns true if the command completed successfully
             {
                 HideApptBox();
             }
@@ -211,6 +237,9 @@ namespace CosmetologyScheduling
             {
                 MessageBox.Show("Error communicating with server. Please try again later.");
             }
+
+            
+
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -220,12 +249,13 @@ namespace CosmetologyScheduling
 
         private void searchCustButton_Click(object sender, EventArgs e)
         {
+            // This method creates a new instance of the CustLookup form and saves the data from the form
             CustLookup custLookup = new CustLookup();
 
             custLookup.ShowDialog();
 
             cust = custLookup.Cust;
-            if (cust != null)
+            if (cust != null) // In the event that the Cancel button is hit, cust will be null
                 customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
 
             custLookup.Dispose();
@@ -233,6 +263,8 @@ namespace CosmetologyScheduling
 
         private void userInfoButton_Click(object sender, EventArgs e)
         {
+            // This method handles the userInfo/Login buttons. They are the same button under different conditions
+
             if (validLogin)
             {
                 MessageBox.Show("Name: " + currentUser.FirstName + " " + currentUser.LastName +
@@ -249,6 +281,7 @@ namespace CosmetologyScheduling
 
         private void logOutButton_Click(object sender, EventArgs e)
         {
+            // This method handles the logout/exit buttons
             if (validLogin)
             {
                 nameLabel.Text = "";
@@ -319,6 +352,7 @@ namespace CosmetologyScheduling
 
         private void LoadStylist()
         {
+            // This method queries the database for all current stylists
             if (stylistList == null)
             {
                 SqlDataReader rdr = null;
@@ -369,6 +403,7 @@ namespace CosmetologyScheduling
 
         private void LoadServices()
         {
+            // This method queries the database for all current services
             if (serviceList == null)
             {
                 SqlDataReader rdr = null;
@@ -419,12 +454,13 @@ namespace CosmetologyScheduling
 
         private void createCustButton_Click(object sender, EventArgs e)
         {
+            // This method creates a new instance of the CustCreate form
             CustCreate custCreate = new CustCreate();
 
             custCreate.ShowDialog();
 
             cust = custCreate.NewCust;
-            if (cust != null)
+            if (cust != null) // In the event that the cancel button is pressed, cust will be null
                 customerNameTextBox.Text = cust.FirstName + " " + cust.LastName;
     
             custCreate.Dispose();
@@ -432,16 +468,20 @@ namespace CosmetologyScheduling
 
         private void stylistDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            apptStylist = stylistList[stylistDropDown.SelectedIndex];
+            if (stylistDropDown.SelectedIndex > -1)
+                apptStylist = stylistList[stylistDropDown.SelectedIndex];
         }
 
         private void servicesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            apptServ = serviceList[servicesListBox.SelectedIndex];
+            if (servicesListBox.SelectedIndex > -1)
+                apptServ = serviceList[servicesListBox.SelectedIndex];
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // This method loads the services and stylists before the form appears on screen
+            // Possible cause of lag before shown event
             LoadServices();
             LoadStylist();
 

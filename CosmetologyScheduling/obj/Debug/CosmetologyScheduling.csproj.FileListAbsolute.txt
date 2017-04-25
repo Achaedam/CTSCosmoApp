@@ -66,3 +66,4 @@ E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduli
 E:\CTS 289\master Proj\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.csproj.GenerateResource.Cache
 D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustLookup.resources
 D:\Users\Anthony\My Documents\CosmetologyScheduling\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustCreate.resources
+C:\Users\utta2\Desktop\GitRepo\trunk\CosmetologyScheduling\obj\Debug\CosmetologyScheduling.CustCreate.resources

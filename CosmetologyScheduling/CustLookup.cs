@@ -39,6 +39,7 @@ namespace CosmetologyScheduling
         // mostly anthony
         private void searchButton_Click(object sender, EventArgs e)
         {
+            // This method queries the database for customers based on their phone or email
             SqlDataReader rdr = null;
             SqlConnection conn = new SqlConnection("Server=tcp:cts.chiltonit.com,1433;Initial Catalog=COSMETOLOGY;User ID=ctsuser;Password=ctsPROJECT!");
             SqlParameter param = new SqlParameter();
